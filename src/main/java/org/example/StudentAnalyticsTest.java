@@ -124,45 +124,45 @@ public class StudentAnalyticsTest extends TestCase {
 
     }
 
-//    private double countNumberOfFailedStudentsOlderThan20Helper(final int repeats) {
-//        final Student[] students = generateStudentData();
-//        final StudentAnalytics analytics = new StudentAnalytics();
-//
-//        final int ref = analytics.countNumberOfFailedStudentsOlderThan20Imperative(students);
-//
-//        final long startSequential = System.currentTimeMillis();
-//        for (int r = 0; r < repeats; r++) {
-//            analytics.countNumberOfFailedStudentsOlderThan20Imperative(students);
-//        }
-//        final long endSequential = System.currentTimeMillis();
-//
-//        final int calc = analytics.countNumberOfFailedStudentsOlderThan20ParallelStream(students);
-//        assertEquals("Mismatch in calculated values", ref, calc);
-//
-//        final long startParallel = System.currentTimeMillis();
-//        for (int r = 0; r < repeats; r++) {
-//            analytics.countNumberOfFailedStudentsOlderThan20ParallelStream(students);
-//        }
-//        final long endParallel = System.currentTimeMillis();
-//
-//        return (double)(endSequential - startSequential) / (double)(endParallel - startParallel);
-//    }
+    private double countNumberOfFailedStudentsOlderThan20Helper(final int repeats) {
+        final Student[] students = generateStudentData();
+        final StudentAnalytics analytics = new StudentAnalytics();
+
+        final int ref = analytics.countNumberOfFailedStudentsOlderThan20Imperative(students);
+
+        final long startSequential = System.currentTimeMillis();
+        for (int r = 0; r < repeats; r++) {
+            analytics.countNumberOfFailedStudentsOlderThan20Imperative(students);
+        }
+        final long endSequential = System.currentTimeMillis();
+
+        final int calc = analytics.countNumberOfFailedStudentsOlderThan20ParallelStream(students);
+        assertEquals("Mismatch in calculated values", ref, calc);
+
+        final long startParallel = System.currentTimeMillis();
+        for (int r = 0; r < repeats; r++) {
+            analytics.countNumberOfFailedStudentsOlderThan20ParallelStream(students);
+        }
+        final long endParallel = System.currentTimeMillis();
+
+        return (double)(endSequential - startSequential) / (double)(endParallel - startParallel);
+    }
 
     /*
      * Test correctness of countNumberOfFailedStudentsOlderThan20ParallelStream.
      */
-//    public void testCountNumberOfFailedStudentsOlderThan20() {
-//        countNumberOfFailedStudentsOlderThan20Helper(1);
-//    }
-//
-//    /*
-//     * Test performance of countNumberOfFailedStudentsOlderThan20ParallelStream.
-//     */
-//    public void testCountNumberOfFailedStudentsOlderThan20Perf() {
-//        final int ncores = getNCores();
-//        final double speedup = countNumberOfFailedStudentsOlderThan20Helper(REPEATS);
-//        String msg = "Expected parallel version to run at least 1.2x faster but speedup was " + speedup;
-//        assertTrue(msg, speedup > 1.2);
-//    }
+    public void testCountNumberOfFailedStudentsOlderThan20() {
+        countNumberOfFailedStudentsOlderThan20Helper(1);
+    }
+
+    /*
+     * Test performance of countNumberOfFailedStudentsOlderThan20ParallelStream.
+     */
+    public void testCountNumberOfFailedStudentsOlderThan20Perf() {
+        final int ncores = getNCores();
+        final double speedup = countNumberOfFailedStudentsOlderThan20Helper(REPEATS);
+        String msg = "Expected parallel version to run at least 1.2x faster but speedup was " + speedup;
+        assertTrue(msg, speedup > 1.2);
+    }
 
 }
